@@ -3,15 +3,33 @@ import React from 'react'
 import { MaxWidthWrapper } from './max-width-wrapper'
 import Link from 'next/link'
 import { authClient } from '@/lib/auth-client'
-import { Button } from '../ui/button'
+import { Button, buttonVariants } from '../ui/button'
+import { useRouter } from 'next/navigation'
+import { ArrowRight } from 'lucide-react'
 
 export default function Navbar() {
-    const { signOut } = authClient
+
+    const { signOut, useSession } = authClient
+
+    const {
+        data: session,
+    } = useSession()
+
     const user = false
 
+    const router = useRouter()
+
     const onSignOut = async () => {
-        await signOut()
+        await signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.push("/sign-in")
+                }
+            }
+        })
     }
+
+    console.log("FROM THE NAVBAR, THIS IS THE SESSION DATA: ", session)
 
     return (
         <nav className='sticky z-[100] h-16 inset-x-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-lg transition-all'>
@@ -22,9 +40,33 @@ export default function Navbar() {
                     </Link>
                     <div className='h-full flex items-center space-x-4'>
                         {
-                            !user ? (
-                                <Button className='bg-brand-600' onClick={() => onSignOut}>Sign Out</Button>
-                            ) : null
+                            user ? (
+                                <>
+                                    <Button size="sm" variant="ghost" onClick={() => onSignOut}>Sign Out</Button>
+                                    <Link href={"/dashboard"} className={buttonVariants({
+                                        size: "sm",
+                                        className: "hidden sm:flex items-center gap-1"
+                                    })}>
+                                        Dashboard <ArrowRight />
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link href={"/pricing"} className={buttonVariants({
+                                        size: "sm",
+                                        variant: "ghost",
+                                    })}>
+                                        Pricing
+                                    </Link>
+
+                                    <Link href={"/sign-in"} className={buttonVariants({
+                                        size: "sm",
+                                        className: "hidden sm:flex items-center gap-1"
+                                    })}>
+                                        Join us <ArrowRight />
+                                    </Link>
+                                </>
+                            )
                         }
                     </div>
                 </div>

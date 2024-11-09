@@ -24,8 +24,8 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="en" className={cn(inter.variable, eb_garamond.variable)}>
-            <body className="font-sans bg-brand-50 text-brand-950 antialiased">
+        <html lang="en" className={cn(inter.variable, eb_garamond.variable)} suppressHydrationWarning>
+            <body className="font-sans bg-brand-50 text-brand-950 antialiased" suppressHydrationWarning>
                 <Providers>{children}</Providers>
             </body>
         </html>
