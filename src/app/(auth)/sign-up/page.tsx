@@ -72,20 +72,11 @@ export default function Page() {
         setIsGoogleLoading(false);
     };
 
-    const handleForgotPassword = () => {
-        if (!email) {
-            toast.error("Please enter your email first");
-            return;
-        }
-        //toast.info("Password reset link sent to your email");
-        console.log("Will route you to forgot password page")
-    };
-
     return (
         <div className="w-full flex flex-col flex-1 items-center justify-center ">
             <Card className="w-full max-w-md p-2 shadow-lg">
                 <CardHeader className="space-y-1 text-center">
-                    <CardTitle className="text-xl">Sign Up to pingpong</CardTitle>
+                    <CardTitle className="text-xl">Create your account</CardTitle>
                     <CardDescription>
                         Welcome to pingpong.ng! Please signup to continue
                     </CardDescription>
@@ -149,15 +140,6 @@ export default function Page() {
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="password">Password</Label>
-                                <Button
-                                    type="button"
-                                    variant="link"
-                                    className="px-0 text-sm text-gray-600 hover:text-gray-900"
-                                    onClick={handleForgotPassword}
-                                    disabled={isLoading || isGoogleLoading}
-                                >
-                                    Forgot password?
-                                </Button>
                             </div>
                             <Input
                                 id="password"
