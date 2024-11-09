@@ -46,8 +46,8 @@ export default function DiscordMessage({
                     <span className='text-gray-400 ml-1.5 text-xs font-normal'>{timestamp}</span>
                 </div>
                 <div className='bg-[#2f3136] text-sm w-full rounded p-3 mb-4 mt-1.5'>
-                    <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2'>
-                        {badgeText ? (<span className={cn("inline-flex order-2 items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ", getBadgeStyles(badgeColor))}>
+                    <div className='flex flex-row items-center justify-between mb-2'>
+                        {badgeText ? (<span className={cn(" inline-flex order-2 items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ", getBadgeStyles(badgeColor))}>
                             {badgeText}
                         </span>) : null}
                         <p className='text-white order-1 text-base/7 font-semibold'>{title}</p>

@@ -77,6 +77,19 @@ export default function Page() {
                                         }}
                                     />
 
+                                    <DiscordMessage
+                                        avatarSrc='/brand-asset-profile-picture.png'
+                                        avatarAlt='PingPong Avatar'
+                                        username='PingPong'
+                                        timestamp='Today at 12:35pm'
+                                        badgeText='Likes This'
+                                        title="👍👍 Liked our article"
+                                        content={{
+                                            name: "Daniel Oliver",
+                                            email: "daniel@oliver.com",
+                                        }}
+                                    />
+
                                 </AnimatedList>
                             </MockDiscordUI>
                         </div>
