@@ -2,7 +2,7 @@
 import React from 'react'
 import { MaxWidthWrapper } from '@/components/custom/max-width-wrapper'
 import { Heading } from '@/components/custom/Heading'
-import { Check } from 'lucide-react'
+import { Check, Star } from 'lucide-react'
 import ShinyButton from '@/components/custom/ShinyButton'
 import MockDiscordUI from '@/components/custom/MockDiscordUI'
 import { AnimatedList } from '@/components/ui/animated-list'
@@ -10,6 +10,7 @@ import DiscordMessage from '@/components/custom/DiscordMessage'
 import Image from 'next/image'
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { Icons } from '@/components/icons'
 
 export default function Page() {
     const codeSnippet = `await fetch("http://localhost:3000/api/v1/events", {
@@ -120,7 +121,7 @@ export default function Page() {
                         <h2 className='text-center text-base/7 font-semibold text-brand-600'>
                             Intuitive Monitoring
                         </h2>
-                        <Heading>Stay ahead with real time insights</Heading>
+                        <Heading className='text-center'>Stay ahead with real time insights</Heading>
                     </div>
 
                     <div className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
@@ -160,7 +161,7 @@ export default function Page() {
                                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
                                     <p className="mt-2 text-lg/7 font-medium tracking-tight text-brand-950 max-lg:text-center">
                                         Track Any Event
-                                    </p>react-syntax-highlighter
+                                    </p>
                                     <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         From new user signups to successful payments, PingPong
                                         notifies you for all critical events in your SaaS.
@@ -243,7 +244,8 @@ export default function Page() {
                                                         'pre[class*="language-"]': {
                                                             ...oneDark['pre[class*="language-"]'],
                                                             background: "transparent",
-                                                            overflow: "hidden",
+                                                            overflow: "scroll",
+                                                            scrollbarWidth: "none"
                                                         },
                                                         'code[class*="language-"]': {
                                                             ...oneDark['code[class*="language-"]'],
@@ -262,15 +264,83 @@ export default function Page() {
                             <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
                         </div>
 
-
-
-
                     </div>
-
                 </MaxWidthWrapper>
             </section>
 
-            <section></section>
+            <section className='relative py-24 sm:py-32 bg-white'>
+                <MaxWidthWrapper className='flex flex-col items-center gap-16 sm:gap-20'>
+                    <div>
+                        <h2 className='text-center font-semibold text-base/7 text-brand-600'>
+                            Real-world Experiences
+                        </h2>
+                        <Heading className='text-center'>What our customers say</Heading>
+                    </div>
+                    <div className='mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200'>
+
+                        { /* first customer review*/}
+                        <div className='flex flex-auto flex-col gap-4 bg-brand-25 p-6 sm:p-8 lg:p-16 rounded-t-[2rem] lg:rounded-tr-none lg:rounded-l-[2rem]'>
+                            <div className='flex gap-0.5 mb-2 justify-center lg:justify-start'>
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className='size-5 text-brand-600 fill-brand-600 ' />
+                                ))}
+                            </div>
+                            <p className='text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty'>
+                                PingPong has been a gamechange for me, i've been using for it for a couple months now and i can boldly say that i love it with all my heart, kudos to the team
+                            </p>
+
+                            <div className='flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2'>
+                                <Image
+                                    src="/user-2.png"
+                                    alt='randome user'
+                                    className='rounded-full object-cover'
+                                    width={48}
+                                    height={48}
+                                />
+                                <div className=' flex flex-col items-center sm:items-start'>
+                                    <p className='font-semibold flex items-center '>
+                                        Freya Larson
+                                        <Icons.verificationBadge className='size-4 inline-block ml-1.5' />
+                                    </p>
+                                    <p className='text-sm text-gray-600'>@itsfreya</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        { /* second customer review*/}
+
+                        <div className='flex flex-auto flex-col gap-4 bg-brand-25 p-6 sm:p-8 lg:p-16 rounded-b-[2rem] lg:rounded-bl-none lg:rounded-r-[2rem]'>
+                            <div className='flex gap-0.5 mb-2 justify-center lg:justify-start'>
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className='size-5 text-brand-600 fill-brand-600 ' />
+                                ))}
+                            </div>
+                            <p className='text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty'>
+                                PingPong has been a gamechange for me, i've been using for it for a couple months now and i can boldly say that i love it with all my heart, kudos to the team
+
+                            </p>
+
+                            <div className='flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2'>
+                                <Image
+                                    src="/user-1.png"
+                                    alt='randome user'
+                                    className='rounded-full object-cover'
+                                    width={48}
+                                    height={48}
+                                />
+                                <div className=' flex flex-col items-center sm:items-start'>
+                                    <p className='font-semibold flex items-center '>
+                                        Lebron James
+                                        <Icons.verificationBadge className='size-4 inline-block ml-1.5' />
+                                    </p>
+                                    <p className='text-sm text-gray-600'>@kingjames</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </MaxWidthWrapper>
+            </section>
         </>
     )
 }
