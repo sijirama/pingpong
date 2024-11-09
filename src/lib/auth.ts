@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { oneTap } from "better-auth/plugins";
 
 export const auth = betterAuth({
     database: prismaAdapter(db, {
@@ -19,7 +20,10 @@ export const auth = betterAuth({
         crossSubDomainCookies: {
             enabled: true
         }
-    }
+    },
+    plugins: [
+        oneTap(),
+    ]
 })
 
 export type AuthType = typeof auth

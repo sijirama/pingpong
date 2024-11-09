@@ -6,21 +6,16 @@ import { authClient } from '@/lib/auth-client'
 import { Button, buttonVariants } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
+import { useAuthSession } from '@/hooks/use-auth-session'
 
 export default function Navbar() {
 
-    const { signOut, useSession } = authClient
-
-    const {
-        data: session,
-    } = useSession()
-
-    const user = false
+    const { user, isLoading, error } = useAuthSession()
 
     const router = useRouter()
 
     const onSignOut = async () => {
-        await signOut({
+        await authClient.signOut({
             fetchOptions: {
                 onSuccess: () => {
                     router.push("/sign-in")
@@ -29,7 +24,9 @@ export default function Navbar() {
         })
     }
 
-    console.log("FROM THE NAVBAR, THIS IS THE SESSION DATA: ", session)
+    if (isLoading) {
+        return null
+    }
 
     return (
         <nav className='sticky z-[100] h-16 inset-x-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-lg transition-all'>
@@ -42,7 +39,7 @@ export default function Navbar() {
                         {
                             user ? (
                                 <>
-                                    <Button size="sm" variant="ghost" onClick={() => onSignOut}>Sign Out</Button>
+                                    <Button size="sm" variant="ghost" onClick={onSignOut}>Sign Out</Button>
                                     <Link href={"/dashboard"} className={buttonVariants({
                                         size: "sm",
                                         className: "hidden sm:flex items-center gap-1"
