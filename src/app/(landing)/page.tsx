@@ -1,9 +1,9 @@
 
 import React from 'react'
-import { MaxWidthWrapper } from './components/custom/max-width-wrapper'
-import { Heading } from './components/custom/Heading'
+import { MaxWidthWrapper } from '../components/custom/max-width-wrapper'
+import { Heading } from '../components/custom/Heading'
 import { Check } from 'lucide-react'
-import ShinyButton from './components/custom/ShinyButton'
+import ShinyButton from '../components/custom/ShinyButton'
 
 export default function Page() {
     return (
