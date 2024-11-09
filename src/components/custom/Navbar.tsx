@@ -7,6 +7,7 @@ import { Button, buttonVariants } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import { useAuthSession } from '@/hooks/use-auth-session'
+import { Skeleton } from '../ui/skeleton'
 
 export default function Navbar() {
 
@@ -24,10 +25,6 @@ export default function Navbar() {
         })
     }
 
-    if (isLoading) {
-        return null
-    }
-
     return (
         <nav className='sticky z-[100] h-16 inset-x-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-lg transition-all'>
             <MaxWidthWrapper>
@@ -36,7 +33,12 @@ export default function Navbar() {
                         Ping <span className='text-brand-700'>Pong</span>
                     </Link>
                     <div className='h-full flex items-center space-x-4'>
-                        {
+                        {isLoading && (
+                            <>
+                                <Skeleton className='h-8 w-28 bg-brand-300' />
+                            </>
+                        )}
+                        {!isLoading && (
                             user ? (
                                 <>
                                     <Button size="sm" variant="ghost" onClick={onSignOut}>Sign Out</Button>
@@ -63,7 +65,7 @@ export default function Navbar() {
                                         Join us <ArrowRight />
                                     </Link>
                                 </>
-                            )
+                            ))
                         }
                     </div>
                 </div>
