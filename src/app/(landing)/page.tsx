@@ -5,6 +5,8 @@ import { Heading } from '@/components/custom/Heading'
 import { Check } from 'lucide-react'
 import ShinyButton from '@/components/custom/ShinyButton'
 import MockDiscordUI from '@/components/custom/MockDiscordUI'
+import { AnimatedList, AnimatedListItem } from '@/components/ui/animated-list'
+import DiscordMessage from '@/components/custom/DiscordMessage'
 
 export default function Page() {
     return (
@@ -45,7 +47,38 @@ export default function Page() {
                 <div className='relative mx-auto'>
                     <MaxWidthWrapper className='relative'>
                         <div className='-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 '>
-                            <MockDiscordUI />
+                            <MockDiscordUI >
+                                <AnimatedList className=''>
+                                    <DiscordMessage
+                                        avatarSrc='/brand-asset-profile-picture.png'
+                                        avatarAlt='PingPong Avatar'
+                                        username='PingPong'
+                                        timestamp='Today at 12:35pm'
+                                        badgeText='SignUp'
+                                        badgeColor='#43b581'
+                                        title="🤩🥳 New user signed up"
+                                        content={{
+                                            name: "Jermain Cole",
+                                            email: "john.doe@example.com",
+                                        }}
+                                    />
+                                    <DiscordMessage
+                                        avatarSrc='/brand-asset-profile-picture.png'
+                                        avatarAlt='PingPong Avatar'
+                                        username='PingPong'
+                                        timestamp='Today at 12:35pm'
+                                        badgeText='Revenue'
+                                        badgeColor='#faa61a'
+                                        title="💰💳 Payment Received"
+                                        content={{
+                                            amount: "$50.00",
+                                            email: "paloma@daniel.com",
+                                            plan: "PRO",
+                                        }}
+                                    />
+
+                                </AnimatedList>
+                            </MockDiscordUI>
                         </div>
                     </MaxWidthWrapper>
                 </div>
