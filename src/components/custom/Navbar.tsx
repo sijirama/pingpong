@@ -1,9 +1,18 @@
+"use client"
 import React from 'react'
 import { MaxWidthWrapper } from './max-width-wrapper'
 import Link from 'next/link'
+import { authClient } from '@/lib/auth-client'
+import { Button } from '../ui/button'
 
 export default function Navbar() {
+    const { signOut } = authClient
     const user = false
+
+    const onSignOut = async () => {
+        await signOut()
+    }
+
     return (
         <nav className='sticky z-[100] h-16 inset-x-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-lg transition-all'>
             <MaxWidthWrapper>
@@ -13,8 +22,8 @@ export default function Navbar() {
                     </Link>
                     <div className='h-full flex items-center space-x-4'>
                         {
-                            user ? (
-                                <></>
+                            !user ? (
+                                <Button className='bg-brand-600' onClick={() => onSignOut}>Sign Out</Button>
                             ) : null
                         }
                     </div>
