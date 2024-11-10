@@ -1,6 +1,6 @@
 import { j } from "./__internals/j"
 
-const authMiddleware = j.middleware(({ c, next }) => {
+const authMiddleware = j.middleware(({ c, ctx, next }) => {
     return next({})
 })
 

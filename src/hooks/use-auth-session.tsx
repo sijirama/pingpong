@@ -1,4 +1,5 @@
 import { authClient } from '@/lib/auth-client'
+import { User } from "@prisma/client"
 
 export function useAuthSession() {
     const { useSession } = authClient
@@ -9,7 +10,7 @@ export function useAuthSession() {
         error,
     } = useSession() || {}
 
-    const user = sessionData?.user
+    const user = sessionData?.user as User
     const session = sessionData?.session
 
     // You can return the necessary values with loading/error states
