@@ -6,6 +6,7 @@ import { ZodError } from "zod"
 import { Bindings } from "../env"
 import { bodyParsingMiddleware, queryParsingMiddleware } from "./middleware"
 import { MutationOperation, QueryOperation } from "./types"
+import { AuthType } from "@/lib/auth"
 
 type OperationType<I extends Record<string, unknown>, O> =
     | QueryOperation<I, O>
@@ -14,7 +15,13 @@ type OperationType<I extends Record<string, unknown>, O> =
 export const router = <T extends Record<string, OperationType<any, any>>>(
     obj: T
 ) => {
-    const route = new Hono<{ Bindings: Bindings; Variables: any }>().onError(
+    const route = new Hono<{
+        Bindings: Bindings;
+        Variables: {
+            user: AuthType["$Infer"]["Session"]["user"] | null;
+            session: AuthType["$Infer"]["Session"]["session"] | null;
+        }
+    }>().onError(
         (err, c) => {
             if (err instanceof HTTPException) {
                 return c.json(

@@ -1,7 +1,22 @@
 import { j } from "./__internals/j"
+import { auth } from "@/lib/auth";
+import { db } from "@/db";
+import { HTTPException } from "hono/http-exception";
 
-const authMiddleware = j.middleware(({ c, ctx, next }) => {
-    return next({})
+const authMiddleware = j.middleware(async ({ c, next }) => {
+    const session = await auth.api.getSession({ headers: c.req.raw.headers });
+    if (!session) {
+        throw new HTTPException(401, { message: "Unauthorized, caught from middleware" })
+    }
+    const user = await db.user.findUnique({
+        where: {
+            id: session?.user.id
+        }
+    })
+    if (!user) {
+        throw new HTTPException(401, { message: "Unauthorized, caught from middleware" })
+    }
+    return next({ user })
 })
 
 export const baseProcedure = j.procedure
