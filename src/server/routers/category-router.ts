@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { router } from "../__internals/router";
 import { privateProcedure } from "../procedures";
 import { startOfMonth } from "date-fns"
+import { z } from "zod";
 
 export const categoryRouter = router({
     getEventCategories: privateProcedure.query(async ({ c, ctx }) => {
@@ -75,5 +76,24 @@ export const categoryRouter = router({
         )
 
         return c.superjson({ categories: categoriesWithCounts })
-    })
+    }),
+
+    deleteCategory: privateProcedure
+        .input(z.object({ name: z.string() }))
+        .mutation(async ({ input, ctx, c }) => {
+            const { user } = ctx
+            const category = await db.eventCategory.findFirst({
+                where: {
+                    name: input.name,
+                    userId: user.id,
+                },
+            })
+            if (!category) {
+                throw new Error("Category not found")
+            }
+
+            await db.eventCategory.delete({ where: { id: category.id } })
+
+            return c.json({ success: true })
+        }),
 })
