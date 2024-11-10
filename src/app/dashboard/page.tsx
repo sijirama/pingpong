@@ -5,6 +5,9 @@ import React from 'react'
 import { headers } from "next/headers"
 import DashboardPage from '@/components/blocks/dashboard/DashboardPage'
 import { DashboardPageContent } from './_content/page-content'
+import CreateEventCategoryModal from '@/components/modals/create-event-category-modal'
+import { Button } from '@/components/ui/button'
+import { PlusIcon } from 'lucide-react'
 
 export default async function Page() {
 
@@ -26,7 +29,14 @@ export default async function Page() {
     }
 
     return (
-        <DashboardPage title='Dashboard'>
+        <DashboardPage cta={
+            <CreateEventCategoryModal>
+                <Button className=''>
+                    <PlusIcon className='size-5' />
+                    Add Category
+                </Button>
+            </CreateEventCategoryModal>
+        } title='Dashboard'>
             <DashboardPageContent />
         </DashboardPage>
     )
