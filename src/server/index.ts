@@ -2,6 +2,7 @@ import { Hono } from "hono"
 import { handle } from "hono/vercel"
 import { auth, AuthType } from "@/lib/auth"
 import { cors } from "hono/cors"
+import { sessionMiddleware } from "./middleware/auth"
 
 // Create a new Hono app for the API
 const api = new Hono<{
@@ -9,14 +10,21 @@ const api = new Hono<{
         user: AuthType["$Infer"]["Session"]["user"] | null;
         session: AuthType["$Infer"]["Session"]["session"] | null;
     }
-}>().basePath('/api').use(cors())
+}>().basePath('/api').use(cors()).use(sessionMiddleware())
+
+api.use(async (c, next) => {
+    console.log(`username is ${c.get("user")?.name}`)
+    await next()
+})
 
 api.on(["POST", "GET"], "/auth/**", (c) => {
-    //console.log("THE FREAKING REQUEST AFTER IVE SWITCHED ON CORS: ", c.req.raw)
     return auth.handler(c.req.raw);
 });
 
 api.get("/health", async (c) => {
+    if (c.get("user")) {
+        return c.json({ message: `pong ${c.get("user")?.name}` })
+    }
     return c.json({ message: "pong" });
 })
 
