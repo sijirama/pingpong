@@ -12,11 +12,6 @@ const api = new Hono<{
         session: AuthType["$Infer"]["Session"]["session"] | null;
     }
 }>().basePath('/api').use(cors()).use(sessionMiddleware())
-api.use(async (c, next) => {
-    console.log(`username is ${c.get("user")?.name}`)
-    await next()
-})
-
 api.on(["POST", "GET"], "/auth/**", (c) => {
     return auth.handler(c.req.raw);
 });

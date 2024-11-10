@@ -56,12 +56,13 @@ export default function CreateEventCategoryModal({ children }: PropsWithChildren
             return await response.json()
         },
         onSuccess: () => {
+            reset()
             queryClient.invalidateQueries({ queryKey: ["user-event-categories"] })
             setIsOpen(false)
         },
     })
 
-    const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<EventCategoryForm>({
+    const { reset, register, handleSubmit, formState: { errors }, watch, setValue } = useForm<EventCategoryForm>({
         resolver: zodResolver(EVENT_CATEGORY_VALIDATOR)
     })
 
@@ -108,7 +109,7 @@ export default function CreateEventCategoryModal({ children }: PropsWithChildren
                         </div>
 
                         <div>
-                            <Label>Emoji</Label>
+                            <Label className='mb-1'>Emoji</Label>
                             <div className="flex flex-wrap gap-3">
                                 {EMOJI_OPTIONS.map(({ emoji, label }) => (
                                     <button
