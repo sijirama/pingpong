@@ -23,7 +23,7 @@ export const auth = betterAuth({
     },
     plugins: [
         oneTap(),
-    ]
+    ],
 })
 
 export type AuthType = typeof auth

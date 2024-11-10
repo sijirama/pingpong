@@ -17,7 +17,7 @@ model User {
     Session       Session[]
     Account       Account[]
 
-    quotaLimit Int
+    quotaLimit Int      @default(100)
     plan       Plan     @default(FREE)
     apiKey     String   @unique @default(cuid())
     discordId  String?
@@ -75,7 +75,7 @@ model Quota {
     user   User   @relation(fields: [userId], references: [id])
     userId String
 
-    year Int
+    year  Int
     month Int
     count Int @default(0)
 
