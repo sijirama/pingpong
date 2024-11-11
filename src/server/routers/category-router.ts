@@ -104,9 +104,7 @@ export const categoryRouter = router({
         color: z.string().min(1, "Color is required.").regex(/^#[0-9A-F]{6}$/i, "Invalid color format."),
         emoji: z.string().emoji("Invalid emoji.").optional()
     })).mutation(async ({ input, c, ctx }) => {
-
         //TODO: ADD PAID PLAN LOGIC
-
         const eventCategory = await db.eventCategory.create({
             data: {
                 name: input.name.toLowerCase(),
@@ -117,6 +115,20 @@ export const categoryRouter = router({
         })
 
         return c.json({ success: true, eventCategory })
+    }),
+
+    insertQuickstartCategories: privateProcedure.mutation(async ({ c, ctx }) => {
+        const categories = await db.eventCategory.createMany({
+            data: [
+                { name: "bug", emoji: "🐛", color: 0xff6b6b },
+                { name: "sale", emoji: "💰", color: 0xffeb3b },
+                { name: "question", emoji: "🤔", color: 0x6c5ce7 },
+            ].map((category) => ({
+                ...category,
+                userId: ctx.user.id,
+            })),
+        })
+        return c.json({ success: true, count: categories.count })
     })
 
 })

@@ -1,4 +1,5 @@
 "use client"
+import DashboardEmptyState from "@/components/blocks/dashboard/DashboardEmptyState";
 import { LoadingSpinner } from "@/components/custom/LoadingSpinner";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
@@ -40,9 +41,7 @@ export function DashboardPageContent({ }: Props) {
     }
 
     if (!categories || categories.length === 0) {
-        return <div className="text-center">
-            You haven't added any event categories yet. Please add some categories to track your events.
-        </div>
+        return <DashboardEmptyState />
     }
 
     return (
