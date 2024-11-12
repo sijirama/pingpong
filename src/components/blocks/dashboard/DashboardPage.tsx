@@ -1,6 +1,9 @@
+"use client"
+
 import { Heading } from '@/components/custom/Heading'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React, { ReactNode } from 'react'
 
 interface Props {
@@ -16,13 +19,14 @@ export default function DashboardPage({
     hideBackButton = true,
     cta,
 }: Props) {
+    const router = useRouter()
     return (
         <section className='flex-1 h-full w-full flex flex-col '>
             <div className='p-6 sm:p-8 sm:py-4 flex justify-between border-b border-gray-200 '>
                 <div className='flex flex-col sm:flex-row items-start gap-4'>
                     <div className='flex items-center gap-5'>
                         {hideBackButton && (
-                            <Button className='w-fit bg-white p-3' variant={"outline"} >
+                            <Button className='w-fit bg-white p-3' variant={"outline"} onClick={() => router.push("/dashboard")} >
                                 <ArrowLeft className='size-4' />
                             </Button>
                         )}

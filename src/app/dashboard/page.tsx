@@ -20,7 +20,7 @@ export default async function Page() {
         redirect("/sign-in")
     }
 
-    const user = db.user.findUnique({
+    const user = await db.user.findUnique({
         where: { id: session.user.id },
     })
 
