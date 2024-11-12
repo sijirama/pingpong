@@ -20,6 +20,8 @@ export const router = <T extends Record<string, OperationType<any, any>>>(
         Variables: {
             user: AuthType["$Infer"]["Session"]["user"] | null;
             session: AuthType["$Infer"]["Session"]["session"] | null;
+        } & {
+            [key: string]: any;
         }
     }>().onError(
         (err, c) => {

@@ -136,7 +136,7 @@ export default function Page() {
                                     </p>
                                     <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         Get notified about critical events the moment they happen,
-                                        no matter if you're at home or on the go.
+                                        no matter if you are at home or on the go.
                                     </p>
                                 </div>
 
@@ -286,7 +286,7 @@ export default function Page() {
                                 ))}
                             </div>
                             <p className='text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty'>
-                                PingPong has been a gamechange for me, i've been using for it for a couple months now and i can boldly say that i love it with all my heart, kudos to the team
+                                PingPong has been a gamechange for me, i have been using for it for a couple months now and i can boldly say that i love it with all my heart, kudos to the team
                             </p>
 
                             <div className='flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2'>
@@ -316,7 +316,7 @@ export default function Page() {
                                 ))}
                             </div>
                             <p className='text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty'>
-                                PingPong has been a gamechange for me, i've been using for it for a couple months now and i can boldly say that i love it with all my heart, kudos to the team
+                                PingPong has been a gamechange for me, i have been using for it for a couple months now and i can boldly say that i love it with all my heart, kudos to the team
 
                             </p>
 

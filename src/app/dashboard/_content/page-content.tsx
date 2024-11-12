@@ -112,7 +112,7 @@ export function DashboardPageContent({ }: Props) {
                     <div>
                         <h2 className="text-lg/7 font-medium tracking-tight text-gray-950">Delete Category</h2>
                         <p className="text-sm/6 text-gray-600">
-                            Are you sure you want to delete the category "{deletingCategory}"? This action cannot be undone.
+                            Are you sure you want to delete the category {deletingCategory}? This action cannot be undone.
                         </p>
                     </div>
                     <div className="flex justify-end space-x-3 pt-4 border-t">

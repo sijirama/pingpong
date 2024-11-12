@@ -167,7 +167,7 @@ export default function Page() {
 
                 <CardFooter>
                     <p className="text-sm text-center text-gray-600 w-full">
-                        Don't have an account?{' '}
+                        Do not have an account?{' '}
                         <Button
                             variant="link"
                             className="px-0 text-sm text-gray-900 hover:text-gray-900"

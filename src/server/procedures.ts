@@ -16,7 +16,7 @@ const authMiddleware = j.middleware(async ({ c, next }) => {
     if (!user) {
         throw new HTTPException(401, { message: "Unauthorized, caught from middleware" })
     }
-    return next({ user })
+    return next({ user, session })
 })
 
 export const baseProcedure = j.procedure

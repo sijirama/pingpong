@@ -1,7 +1,6 @@
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Navbar from '@/components/custom/Navbar'
-import { ReactNode } from 'hono/jsx'
 
 export default function Layout({ children }: { children: ReactNode }) {
     return (<>
