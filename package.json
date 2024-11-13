@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@better-fetch/fetch": "^1.1.12",
+    "@discordjs/rest": "^2.4.0",
     "@hookform/resolvers": "^3.9.1",
     "@neondatabase/serverless": "^0.9.4",
     "@prisma/adapter-neon": "^5.18.0",
@@ -51,6 +52,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "discord-api-types": "^0.37.104",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

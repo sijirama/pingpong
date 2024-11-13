@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { Icons } from '@/components/icons'
-import { CONFIG } from '@/lib/config'
+import { CONFIG } from '@/config'
 
 export default function Page() {
     const codeSnippet = `await fetch("${CONFIG.URL}/api/v1/events", {

@@ -1,7 +1,7 @@
 
 import CustomCard from '@/components/ui/custom-card'
 import { client } from '@/lib/client'
-import { CONFIG } from '@/lib/config'
+import { CONFIG } from '@/config'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
@@ -31,13 +31,13 @@ export default function EmptyCategoryState({ categoryName }: { categoryName: str
         if (hasEvents) router.refresh()
     }, [router, hasEvents])
 
-    const codeSnippet = `await fetch('${CONFIG.URL}/api/events', {
+    const codeSnippet = `await fetch('${CONFIG.URL}/api/v1/events', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY'
   },
   body: JSON.stringify({
-    category: '${categoryName}',
+    category: '${categoryName.toLowerCase()}',
     fields: {
       field1: 'value1', // for example: user id
       field2: 'value2' // for example: user email
