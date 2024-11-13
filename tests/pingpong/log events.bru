@@ -6,6 +6,20 @@ meta {
 
 post {
   url: http://localhost:3000/api/v1/events
-  body: none
+  body: json
   auth: none
+}
+
+headers {
+  Authorization: Bearer cm3awr4q90000ig07lekcy8d6
+}
+
+body:json {
+  {
+    "category": "question",
+    "fields": {
+        "amount": "20", 
+        "email": "jogndoe@gmail.com"
+      }
+  }
 }
