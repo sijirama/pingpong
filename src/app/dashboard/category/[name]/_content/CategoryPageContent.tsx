@@ -64,8 +64,7 @@ export default function CategoryPageContent({ hasEvents: initialHasEvents, categ
             cell: ({ row }) => {
                 return new Date(row.getValue("createdAt")).toLocaleString()
             }
-        }
-
+        },
     ], [])
 
 
