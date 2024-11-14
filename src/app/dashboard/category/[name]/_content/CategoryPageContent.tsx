@@ -8,8 +8,10 @@ import { useSearchParams } from 'next/navigation'
 import { client } from '@/lib/client'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import CustomCard from '@/components/ui/custom-card'
-import { BarChart } from 'lucide-react'
+import { ArrowUpDown, BarChart } from 'lucide-react'
 import { isAfter, isToday, startOfMonth, startOfWeek } from 'date-fns'
+import { ColumnDef } from "@tanstack/react-table"
+import { Button } from '@/components/ui/button'
 
 interface CategoryPageContentProps {
     hasEvents: boolean
@@ -38,6 +40,34 @@ export default function CategoryPageContent({ hasEvents: initialHasEvents, categ
     if (!pollingData.hasEvents) {
         return <EmptyCategoryState categoryName={category.name} />
     }
+
+    const columns: ColumnDef<Event>[] = useMemo(() => [
+        {
+            accessorKey: "category",
+            header: "Category",
+            cell: () => <span>{category.name || "Uncategorized"}</span>
+        },
+        {
+
+            accessorKey: "createdAt",
+            header: ({ column }) => {
+                <Button
+                    variant={"ghost"}
+                    onClick={() => {
+                        column.toggleSorting(column.getIsSorted() === "asc")
+                    }}
+                >
+                    Date
+                    <ArrowUpDown className='ml-2 size-4' />
+                </Button>
+            },
+            cell: ({ row }) => {
+                return new Date(row.getValue("createdAt")).toLocaleString()
+            }
+        }
+
+    ], [])
+
 
     const { data, isFetching } = useQuery({
         queryKey: ["events", category.name, pagination.pageIndex, pagination.pageSize, activeTab],
@@ -113,7 +143,7 @@ export default function CategoryPageContent({ hasEvents: initialHasEvents, categ
                         : sums.thisMonth
 
             return (
-                <CustomCard key={field}>
+                <CustomCard key={field} className='border-2 border-brand-100'>
                     <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <p className="text-sm/6 font-medium">
                             {field.charAt(0).toUpperCase() + field.slice(1)}
