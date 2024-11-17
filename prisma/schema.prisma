@@ -91,7 +91,7 @@ enum DeliveryStatus {
 
 enum Plan {
     FREE
-    PREMIUM
+    PRO
 }
 
 model Session {

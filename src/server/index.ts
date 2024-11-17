@@ -4,6 +4,8 @@ import { auth, AuthType } from "@/lib/auth"
 import { cors } from "hono/cors"
 import { sessionMiddleware } from "./middleware/auth"
 import { categoryRouter } from "./routers/category-router"
+import { paymentRouter } from "./routers/payment-router"
+import { projectRouter } from "./routers/project-router"
 
 // Create a new Hono app for the API
 const api = new Hono<{
@@ -25,6 +27,8 @@ api.get("/health", async (c) => {
 
 const appRouter = api
     .route("/category", categoryRouter)
+    .route("/payment", paymentRouter)
+    .route("/project", projectRouter)
 
 appRouter.all("*", (c) => {
     //console.log(`where tf are you going ${c.get("user")?.name}`)
