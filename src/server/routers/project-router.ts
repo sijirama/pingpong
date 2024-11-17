@@ -4,6 +4,7 @@ import { privateProcedure } from "../procedures";
 import { db } from "@/db";
 import { FREE_QUOTA, PREMIUM_QUOTA } from "@/config";
 import { z } from "zod";
+import { createId } from '@paralleldrive/cuid2';
 
 export const projectRouter = router({
 
@@ -57,8 +58,20 @@ export const projectRouter = router({
 
         return c.json({ success: true })
     }),
-    refreshApiKey: privateProcedure.mutation(async ({ c, ctx }) => {
 
-        return c.json({ apiKey: "keyaa" })
+    refreshApiKey: privateProcedure.mutation(async ({ c, ctx }) => {
+        const uniqueId = (createId());
+
+        const updatedUser = await db.user.update({
+            where: { id: ctx.user.id },
+            data: {
+                apiKey: uniqueId
+            },
+            select: {
+                apiKey: true,
+            }
+        })
+
+        return c.json({ apiKey: updatedUser.apiKey })
     })
 })

@@ -30,6 +30,10 @@ export const ApiKeyPageContent = ({ user }: { user: User }) => {
         onSuccess: (response) => {
             setApiKey(response.apiKey)
             toast.success("success refreshing api key")
+        },
+        onError: (err) => {
+            toast.error("Error refreshing api key")
+            console.error(err)
         }
     })
 
@@ -64,7 +68,7 @@ export const ApiKeyPageContent = ({ user }: { user: User }) => {
                         Generate New API Key
                     </Button>
                     <span className="ml-2 text-sm/6 text-gray-600">
-                        (Your new key will be automatically generated)
+                        (Make sure to update this accross your devices)
                     </span>
                 </div>
             </div>
