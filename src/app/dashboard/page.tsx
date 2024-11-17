@@ -24,6 +24,8 @@ export default async function Page() {
         where: { id: session.user.id },
     })
 
+    console.log("WE HIT DASHBOARD LAYOUT: ", user)
+
     if (!user) {
         redirect("/sign-in")
     }

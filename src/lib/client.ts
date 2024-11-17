@@ -1,3 +1,4 @@
+import { CONFIG } from "@/config"
 import type { AppType } from "@/server"
 import { hc } from "hono/client"
 import { HTTPException } from "hono/http-exception"
@@ -9,6 +10,8 @@ const getBaseUrl = () => {
     if (typeof window !== "undefined") {
         return ""
     }
+
+    return CONFIG.URL
 
     return process.env.NODE_ENV === "development"
         ? "http://localhost:3000/"
