@@ -3,8 +3,10 @@ import { router } from "../__internals/router";
 import { privateProcedure } from "../procedures";
 import { db } from "@/db";
 import { FREE_QUOTA, PREMIUM_QUOTA } from "@/config";
+import { z } from "zod";
 
 export const projectRouter = router({
+
     getUsage: privateProcedure.query(async ({ c, ctx }) => {
 
         const { user } = ctx
@@ -36,5 +38,27 @@ export const projectRouter = router({
             eventsLimit: limit.maxEventsPerMonth,
             resetDate
         })
+    }),
+
+    setBotId: privateProcedure.input(z.object({
+        discordId: z.string().optional(),
+        slackId: z.string().optional()
+    })).mutation(async ({ input, c, ctx }) => {
+        const { user } = ctx
+        const { discordId, slackId } = input
+
+        await db.user.update({
+            where: { id: user.id },
+            data: {
+                discordId,
+                slackId
+            }
+        })
+
+        return c.json({ success: true })
+    }),
+    refreshApiKey: privateProcedure.mutation(async ({ c, ctx }) => {
+
+        return c.json({ apiKey: "keyaa" })
     })
 })

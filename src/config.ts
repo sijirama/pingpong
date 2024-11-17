@@ -16,3 +16,4 @@ export const CONFIG = {
 
 export const DISCORD_INVITE_LINK = "https://discord.com/oauth2/authorize?client_id=1306045899587321856"
 export const DISCORD_GUILD_INSTALL = "https://discord.com/oauth2/authorize?client_id=1306045899587321856&permissions=2048&integration_type=0&scope=bot"
+export const DISCORD_GUIDE_GUILD_ID = "https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID#h_01HRSTXPS5FMK2A5SMVSX4JW4E"
