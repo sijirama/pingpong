@@ -36,14 +36,14 @@ export default function CategoryPageContent({ hasEvents: initialHasEvents, categ
         pageSize: limit
     })
 
+    const [sorting, setSorting] = useState<SortingState>([])
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
     const { data: pollingData } = useQuery({
         queryKey: ["category", category.name, "hasEvents"],
         initialData: { hasEvents: initialHasEvents }
     })
 
-    if (!pollingData.hasEvents) {
-        return <EmptyCategoryState categoryName={category.name} />
-    }
 
     const { data, isFetching } = useQuery({
         queryKey: ["events", category.name, pagination.pageIndex, pagination.pageSize, activeTab],
@@ -118,8 +118,6 @@ export default function CategoryPageContent({ hasEvents: initialHasEvents, categ
         [category.name, data?.events]
     )
 
-    const [sorting, setSorting] = useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
     const table = useReactTable({
         data: data?.events || [],
@@ -229,6 +227,10 @@ export default function CategoryPageContent({ hasEvents: initialHasEvents, categ
                 </CustomCard>
             )
         })
+    }
+
+    if (!pollingData.hasEvents) {
+        return <EmptyCategoryState categoryName={category.name} />
     }
 
     return (

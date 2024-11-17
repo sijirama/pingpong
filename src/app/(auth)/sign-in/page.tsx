@@ -11,17 +11,18 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { Icons } from '@/components/icons';
 import { authClient } from '@/lib/auth-client';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-    const searchParams = useSearchParams()
-    const intent = searchParams.get("intent")
+    //const searchParams = useSearchParams()
+    //const intent = searchParams.get("intent")
 
-    const route = intent == "upgrade" ? "/dashboard/upgrade" : null
+    const route = null
+    //intent == "upgrade" ? "/dashboard/upgrade" : null
 
 
     const router = useRouter()
@@ -38,7 +39,7 @@ export default function Page() {
             email,
             password
         }, {
-            onRequest: (ctx) => {
+            onRequest: () => {
                 setIsLoading(true);
             },
             onSuccess: () => {
