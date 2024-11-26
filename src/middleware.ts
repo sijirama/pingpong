@@ -3,6 +3,7 @@ import type { Session } from "better-auth/types";
 import { NextResponse, type NextRequest } from "next/server";
 
 export default async function authMiddleware(request: NextRequest) {
+
     const { data: session } = await betterFetch<Session>(
         "/api/auth/get-session",
         {

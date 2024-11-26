@@ -1,3 +1,4 @@
+import { CONFIG } from "@/config";
 import { db } from "@/db";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
@@ -16,6 +17,7 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         },
     },
+    baseURL: CONFIG.URL,
     advanced: {
         crossSubDomainCookies: {
             enabled: true
