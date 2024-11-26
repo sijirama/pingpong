@@ -41,10 +41,10 @@ export default function Navbar() {
                         {!isLoading && (
                             user ? (
                                 <>
-                                    <Button size="sm" variant="ghost" onClick={onSignOut}>Sign Out</Button>
+                                    <Button size="sm" variant="ghost" className='hidden sm:flex' onClick={onSignOut}>Sign Out</Button>
                                     <Link href={"/dashboard"} className={buttonVariants({
                                         size: "sm",
-                                        className: "hidden sm:flex items-center gap-1"
+                                        className: "flex items-center gap-1"
                                     })}>
                                         Dashboard <ArrowRight />
                                     </Link>
