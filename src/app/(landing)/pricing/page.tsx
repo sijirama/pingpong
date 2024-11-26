@@ -80,7 +80,7 @@ export default function Page() {
                                         ₦5000
                                     </span>
                                     <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
-                                        USD
+                                        NGN
                                     </span>
                                 </p>
 
