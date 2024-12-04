@@ -109,9 +109,6 @@ export const POST = async (req: NextRequest) => {
 
         try {
 
-            const discord = new DiscordClient(CONFIG.DISCORD_TOKEN);
-            await discord.sendMessage(user.discordId, eventData);
-
             await db.event.update({
                 where: {
                     id: event.id
@@ -121,11 +118,59 @@ export const POST = async (req: NextRequest) => {
                 }
             })
 
-            await db.quota.upsert({
-                where: { userId: user.id, month: currentMonth, year: currentYear },
-                update: { count: { increment: 1 } },
-                create: { userId: user.id, month: currentMonth, year: currentYear, count: 1 }
-            })
+            //INFO: upert here fails, let's try the more manual method
+            // await db.quota.upsert({
+            //     where: { userId: user.id, month: currentMonth, year: currentYear },
+            //     update: { count: { increment: 1 } },
+            //     create: { userId: user.id, month: currentMonth, year: currentYear, count: 1 }
+            // })
+
+            // Check if the record exists
+            const existingQuota = await db.quota.findFirst({
+                where: {
+                    userId: user.id,
+                    month: currentMonth,
+                    year: currentYear,
+                },
+            });
+
+            if (existingQuota) {
+                // If the record exists, update it
+                await db.quota.update({
+                    where: {
+                        id: existingQuota.id, // Use a unique identifier
+                    },
+                    data: {
+                        count: {
+                            increment: 1, // Increment the count
+                        },
+                    },
+                });
+
+            } else {
+
+                // If the record doesn't exist, create it
+                await db.quota.deleteMany({
+                    where: {
+                        userId: user.id,
+                    },
+                })
+
+                await db.quota.create({
+                    data: {
+                        user: {
+                            connect: { id: user.id },
+                        },
+                        month: currentMonth,
+                        year: currentYear,
+                        count: 1, // Initialize the count
+                    },
+                });
+
+            }
+
+            const discord = new DiscordClient(CONFIG.DISCORD_TOKEN);
+            await discord.sendMessage(user.discordId, eventData);
 
         } catch (error: any) {
             await db.event.update({
